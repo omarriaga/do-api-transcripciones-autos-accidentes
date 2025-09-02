@@ -54,7 +54,7 @@ steps:
       - '--service-account=${_SERVICE_ACCOUNT}'
       - '--platform=managed'
       - '--labels=billing-tags=api_dataops,area=dataops,env=${_ENV},project=${_IMAGE_NAME}'
-      - '--set-env-vars=ENV=${_ENV},DB_SECRET_CREDENTIALS=${_DB_SECRET_CREDENTIALS}'
+      - '--set-env-vars=ENV=${_ENV},CREDENTIAL_SECRET=${_DB_SECRET_CREDENTIALS}'
       - '--quiet' # Opción para evitar la confirmación interactiva.
 
 # Configuración de logging estándar
