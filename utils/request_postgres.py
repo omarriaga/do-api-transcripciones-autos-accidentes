@@ -27,15 +27,15 @@ async def consultar_conversacion(
     params = {}
 
     if request.dni:
-        params["dnis"] = request.dni
-        sql += " AND dnis like '%:dnis%' "
+        params["dnis"] = f"%{request.dni}%"
+        sql += " AND dnis like :dnis "
     if request.fecha:
         params["fecha_inicio"] = request.fecha - SIETE_DIAS
         params["fecha_fin"] = request.fecha + SIETE_DIAS
         sql += " AND hora_transcripciones_mil between :fecha_inicio and :fecha_fin "
     if request.gestor:
-        params["gestor"] = request.gestor
-        sql += " AND name like '%:gestor%' "
+        params["gestor"] = f"%{request.gestor}%"
+        sql += " AND name like :gestor "
 
     query = sqlalchemy.text(sql)
         
