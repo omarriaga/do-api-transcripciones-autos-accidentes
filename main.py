@@ -46,7 +46,7 @@ summary_path = 'un resumen del endpoint de consulta'
 endpoint_end = '/api/transcripciones/autos-accidentes'
 
 
-@app.get(endpoint_end, summary=summary_path, description=descripcion_path, response_model=Optional[DataResponse])
+@app.post(endpoint_end, summary=summary_path, description=descripcion_path, response_model=Optional[DataResponse])
 async def api_consulta_sabana_facilities(conversaciones: Optional[DataResponse] = Depends(consultar_conversacion)):
     if conversaciones is None:
         return JSONResponse(status_code=404, content={"error": "No hay conversaciones para mostrar"})
