@@ -35,7 +35,7 @@ async def consultar_conversacion(
         sql += " AND hora_transcripciones_mil between :fecha_inicio and :fecha_fin "
     if request.gestor:
         params["gestor"] = f"%{request.gestor}%"
-        sql += " AND name like :gestor "
+        sql += " AND nombre_usuario like :gestor "
 
     sql += " ORDER BY hora_transcripciones_mil ASC"
 
