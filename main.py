@@ -43,7 +43,7 @@ app.add_middleware(
 #* Definición de un endpoint
 descripcion_path = 'aqui se describe el endpoint de consulta'
 summary_path = 'un resumen del endpoint de consulta'
-endpoint_end = '/api/consulta'
+endpoint_end = '/api/transcripciones/autos-accidentes'
 
 
 @app.get(endpoint_end, summary=summary_path, description=descripcion_path, response_model=Optional[DataResponse])
