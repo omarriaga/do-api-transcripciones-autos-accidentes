@@ -7,7 +7,9 @@ from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncConnection
 from typing import Optional
 from models.models import DataRequest, DataResponse, Transcripcion
+from datetime import timedelta
 
+SIETE_DIAS = timedelta(days=7)
 
 async def consultar_conversacion(
     request: DataRequest,
@@ -27,9 +29,9 @@ async def consultar_conversacion(
     if request.dni:
         params["dnis"] = request.dni
         sql += " AND dnis like '%:dnis%' "
-    if request.fecha_inicio and request.fecha_fin :
-        params["fecha_inicio"] = request.fecha_inicio
-        params["fecha_fin"] = request.fecha_fin
+    if request.fecha:
+        params["fecha_inicio"] = request.fecha - SIETE_DIAS
+        params["fecha_fin"] = request.fecha + SIETE_DIAS
         sql += " AND hora_transcripciones_mil between :fecha_inicio and :fecha_fin "
     if request.gestor:
         params["gestor"] = request.gestor
