@@ -37,6 +37,8 @@ async def consultar_conversacion(
         params["gestor"] = f"%{request.gestor}%"
         sql += " AND name like :gestor "
 
+    sql += " ORDER BY hora_transcripciones_mil ASC"
+
     query = sqlalchemy.text(sql)
         
     results = await db.execute(query, params)
