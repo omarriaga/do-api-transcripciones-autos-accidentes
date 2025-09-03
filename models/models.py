@@ -17,12 +17,12 @@ class Transcripcion(BaseModel):
     fecha_fin_participante: datetime
     equipo: str
     sentimiento: float
-    tendencia_sentimiento: str
+    tendencia_sentimiento: float
     transcripcion: str
     confianza: float
     tipo_direccion: str
-    hora_transcripciones_mil: int
-    fecha_cargue: datetime
+    hora_transcripciones_mil: datetime
+    fecha_cargue: str
 
 class DataResponse(BaseModel):
     data: list[Transcripcion]
