@@ -6,23 +6,23 @@ ERROR_FECHA_INVALIDA = "Fecha inválida. Debe ser en formato DD/MM/YYYY o YYYY-M
 
 class Transcripcion(BaseModel):
     id_conversacion: Optional[str]
-    dnis: str
-    id_cola: str
-    nombre_cola: str
-    id_usuario: str
-    nombre_usuario: str
-    username: str
-    emisor: str
-    fecha_inicio_participante: datetime
-    fecha_fin_participante: datetime
-    equipo: str
-    sentimiento: float
-    tendencia_sentimiento: float
-    transcripcion: str
-    confianza: float
-    tipo_direccion: str
-    hora_transcripciones_mil: datetime
-    fecha_cargue: str
+    dnis: Optional[str]
+    id_cola: Optional[str]
+    nombre_cola: Optional[str]
+    id_usuario: Optional[str]
+    nombre_usuario: Optional[str]
+    username: Optional[str]
+    emisor: Optional[str]
+    fecha_inicio_participante: Optional[datetime]
+    fecha_fin_participante: Optional[datetime]
+    equipo: Optional[str]
+    sentimiento: Optional[float]
+    tendencia_sentimiento: Optional[float]
+    transcripcion: Optional[str]
+    confianza: Optional[float]
+    tipo_direccion: Optional[str]
+    hora_transcripciones_mil: Optional[datetime]
+    fecha_cargue: Optional[str]
 
 class DataResponse(BaseModel):
     data: list[Transcripcion]
