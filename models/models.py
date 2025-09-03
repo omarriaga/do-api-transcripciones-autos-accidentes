@@ -28,9 +28,9 @@ class DataResponse(BaseModel):
     data: list[Transcripcion]
 
 class DataRequest(BaseModel):
-    dni: Optional[str]
-    fecha: Optional[datetime]
-    gestor: Optional[str]
+    dni: Optional[str] = None
+    fecha: Optional[datetime] = None
+    gestor: Optional[str] = None
 
     @field_validator('fecha', mode='before')
     @classmethod
