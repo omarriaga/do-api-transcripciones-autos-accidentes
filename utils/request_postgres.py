@@ -17,9 +17,7 @@ async def consultar_conversacion(
 ) -> Optional[DataResponse]:
 
     sql = """
-        SELECT  id_conversacion, dnis, id_cola, nombre_cola, id_usuario, nombre_usuario, username, emisor, 
-                fecha_inicio_participante, fecha_fin_participante, equipo, sentimiento, tendencia_sentimiento, 
-                transcripcion, confianza, tipo_direccion, hora_transcripciones_mil, fecha_cargue
+        SELECT id_conversacion, dialogo, "name" as nombre, username, fecha_llamada, address
         FROM api_backend.t_transcripciones_autos_accidentes
         WHERE 1 = 1        
     """
@@ -27,17 +25,17 @@ async def consultar_conversacion(
     params = {}
 
     if request.dni:
-        params["dnis"] = f"%{request.dni}%"
-        sql += " AND dnis like :dnis "
+        params["address"] = f"%{request.dni}%"
+        sql += " AND address like :address "
     if request.fecha:
         params["fecha_inicio"] = request.fecha - SIETE_DIAS
         params["fecha_fin"] = request.fecha + SIETE_DIAS
-        sql += " AND hora_transcripciones_mil between :fecha_inicio and :fecha_fin "
+        sql += " AND fecha_llamada between :fecha_inicio and :fecha_fin "
     if request.gestor:
         params["gestor"] = f"%{request.gestor}%"
-        sql += " AND nombre_usuario like :gestor "
+        sql += " AND username like :gestor "
 
-    sql += " ORDER BY hora_transcripciones_mil ASC"
+    sql += " ORDER BY fecha_llamada ASC"
 
     query = sqlalchemy.text(sql)
         
