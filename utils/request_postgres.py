@@ -66,8 +66,8 @@ async def consultar_transcripcion_whatsapp(
         params["conversationid"] = request.conversationid
         sql += " AND conversationid = :conversationid "
     if request.numero_telefono:
-        params["numero_telefono"] = request.numero_telefono
-        sql += " AND numero_telefono = :numero_telefono "
+        params["numero_telefono"] = f"%{request.numero_telefono}"
+        sql += " AND numero_telefono like :numero_telefono "
     if request.fecha_inicio:
         params["fecha_inicio"] = request.fecha_inicio
         sql += " AND inicio_conversacion >= :fecha_inicio "
