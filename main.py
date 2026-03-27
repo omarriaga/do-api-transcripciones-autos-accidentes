@@ -7,11 +7,11 @@ from fastapi.responses import RedirectResponse, JSONResponse
 import os
 
 
-from utils.request_postgres import consultar_conversacion
+from utils.request_postgres import consultar_conversacion, consultar_transcripcion_whatsapp
 from utils.connect_sql import create_db_engine_async
 from contextlib import asynccontextmanager
 from typing import Optional
-from models.models import DataResponse
+from models.models import DataResponse, DataResponseWhatsapp
 
 # Parametros básicos y clases
 from fastapi.middleware.gzip import GZipMiddleware
@@ -56,5 +56,18 @@ async def api_consulta_sabana_facilities(conversaciones: Optional[DataResponse] 
 @app.get("/", response_class=RedirectResponse)
 async def redirect_to_docs():
     return "/docs"
+
+
+#* Endpoint para transcripciones de WhatsApp
+descripcion_whatsapp = 'Consulta de transcripciones de conversaciones de WhatsApp'
+summary_whatsapp = 'Transcripciones WhatsApp'
+endpoint_whatsapp = '/api/transcripciones/whatsapp'
+
+
+@app.post(endpoint_whatsapp, summary=summary_whatsapp, description=descripcion_whatsapp, response_model=Optional[DataResponseWhatsapp])
+async def api_consulta_transcripciones_whatsapp(conversaciones: Optional[DataResponseWhatsapp] = Depends(consultar_transcripcion_whatsapp)):
+    if conversaciones is None:
+        return JSONResponse(status_code=404, content={"error": "No hay conversaciones para mostrar"})
+    return conversaciones
 
 
